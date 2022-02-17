@@ -9,7 +9,7 @@ const storeContext = createContext({});
 
 export { storeContext };
 
-function Provider({ children }) {
+const Provider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, store);
   const providerMemo = useMemo(() => ({ state, dispatch }), [state]);
 
