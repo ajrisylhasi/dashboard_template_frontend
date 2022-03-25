@@ -1,7 +1,6 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Deposits from "./Deposits";
 import Copyright from "../../shared/components/Copyright";
 
 const HomeContent = () => (
@@ -16,7 +15,7 @@ const HomeContent = () => (
             height: 240,
           }}
         >
-          <Deposits />
+          <p>Hello</p>
         </Paper>
       </Grid>
     </Grid>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import { Link as RouterLink } from "react-router-dom";
+import {Link as RouterLink, useHistory} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,10 +10,16 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import Copyright from "../../shared/components/Copyright";
+import {useContext} from "react";
+import {storeContext} from "components/provider/Provider";
+import {layoutActions} from "store/layouts-reducer";
 
 const { REACT_APP_SITE_URL } = process.env;
 const Register = () => {
+
+  const { dispatch } = useContext(storeContext);
+  const history = useHistory();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -21,13 +27,32 @@ const Register = () => {
       user: {
         email: formData.get("email"),
         password: formData.get("password"),
-        username: formData.get("username"),
       },
     };
-    axios.post(`${REACT_APP_SITE_URL}/api/users/`, data).then((res) => {
-      // eslint-disable-next-line no-console
-      console.log(res);
-    });
+    axios
+      .post(`${REACT_APP_SITE_URL}/api/users/`, data)
+      .then(() => {
+        history.push("/login");
+        dispatch({
+          type: layoutActions.LAYOUT_SET_ALL,
+          payload: {
+            openMessage: true,
+            error: false,
+            signalMessage: "Account Registered!",
+          },
+        });
+      })
+      .catch(() => {
+        dispatch({
+          type: layoutActions.LAYOUT_SET_ALL,
+          payload: {
+            openMessage: true,
+            error: true,
+            signalMessage:
+              "Something went wrong! Password must be longer than 5 characters and username cannot be used twice.",
+          },
+        });
+      });
   };
 
   return (
@@ -48,16 +73,6 @@ const Register = () => {
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                id="username"
-                label="Username"
-                name="username"
-                autoComplete="username"
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 required
@@ -97,7 +112,6 @@ const Register = () => {
           </Grid>
         </Box>
       </Box>
-      <Copyright sx={{ mt: 5 }} />
     </Container>
   );
 };
