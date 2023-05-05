@@ -1,4 +1,97 @@
 .root {
-    display: flex;
-    height: 100%;
+	display: flex;
+	height: 100%;
+}
+
+.App {
+	text-align: center;
+	width: 100%;
+}
+
+.App-logo {
+	height: 40vmin;
+	pointer-events: none;
+}
+
+.App-header {
+	background-color: white;
+	min-height: 50vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.App-link {
+	color: #61dafb;
+}
+
+.App form {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.App label {
+	display: block;
+	margin-bottom: 5px;
+	color: #2F4F4F;
+}
+
+.App input[type="text"],
+.App input[type="email"],
+.App textarea {
+	width: calc(90% - 20px);
+	padding: 10px;
+	margin-bottom: 15px;
+	border: none;
+	border-radius: 5px;
+	background-color: rgb(130, 236, 190, 0.15);
+	color: #2F4F4F;
+	resize: none;
+}
+
+@media (max-width: 767px) {
+	.App form {
+		padding: 10px;
+	}
+
+	.App input[type="text"],
+	.App input[type="email"],
+	.App textarea {
+		font-size: 16px;
+	}
+
+	.App button[type="submit"] {
+		font-size: 16px;
+		padding: 8px 16px;
+	}
+}
+
+@media (max-width: 480px) {
+	.App form {
+		max-width: 100%;
+	}
+}
+
+.App textarea {
+	height: 150px;
+}
+
+.App button[type="submit"] {
+	background-color: #2F4F4F;
+	color: white;
+	padding: 10px 20px;
+	margin-bottom: 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.App button[type="submit"]:hover {
+	background-color: #3CB371;
 }

@@ -6,16 +6,16 @@ import ListSubheader from "@mui/material/ListSubheader";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useHistory } from "react-router-dom";
-import { authActions } from "../../store/auth-reducer";
-import { storeContext } from "../provider/Provider";
+import { useNavigate } from "react-router-dom";
+import { authActions } from "store/auth-reducer";
+import { storeContext } from "components/provider/Provider";
 
 const SecondaryListItems = () => {
   const { dispatch } = React.useContext(storeContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleLogout = () => {
     dispatch({ type: authActions.LOGOUT });
-    history.push("/login");
+    navigate("/login");
   };
 
   return (

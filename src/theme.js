@@ -1,9 +1,42 @@
 /* eslint-disable no-useless-computed-key */
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
-    mode: "light",
+    primary: {
+      light: "rgb(50, 168, 82, 0.35)",
+      main: "#3d7d4e",
+      contrastText: "#eff6ee"
+    },
+    white: {
+      main: "#EFF6EE"
+    },
+    secondary: {
+      main: "#FF6542",
+      contrastText: '#EFF6EE',
+    },
+    error: {
+      main: "#FF6542",
+      contrastText: '#EFF6EE',
+    },
+    warning: {
+      main: "#FF6542"
+    },
+    info: {
+      main: "#273043"
+    }
+  },
+  typography: {
+    fontFamily: [
+      "'Arvo', serif"
+    ]
+  },
+  overrides: {
+    MuiGrid: {
+      root: {
+        flexWrap: "nowrap"
+      },
+    },
   },
   breakpoints: {
     values: {
@@ -14,6 +47,7 @@ const theme = createTheme({
       xl: 1920,
     },
   },
+
 });
 
 export default theme;

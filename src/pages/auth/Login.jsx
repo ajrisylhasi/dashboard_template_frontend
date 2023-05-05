@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import axios from "axios";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -10,35 +9,31 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import { storeContext } from "../provider/Provider";
-import Copyright from "../../shared/components/Copyright";
-import { authActions } from "../../store/auth-reducer";
+import { storeContext } from "components/provider/Provider";
+import { authActions } from "store/auth-reducer";
+import { layoutActions } from "store/layout-reducer";
+import Copyright from "shared/components/Copyright";
 
-const { REACT_APP_SITE_URL } = process.env;
 const Login = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["auth"]);
   const { dispatch } = React.useContext(storeContext);
 
   const logUser = (token) => {
-    setCookie("id", token.data.token, {
+    setCookie("id", token, {
       path: "/",
       maxAge: 1209600,
     });
     dispatch({
-      type: authActions.SET_LOGGED_IN,
-      payload: {
-        isLoggedIn: true,
-      },
+      type: authActions.LOGIN
     });
-    history.push("/");
+    navigate("/feed");
   };
 
-  const catchErrors = () => {};
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -48,19 +43,21 @@ const Login = () => {
         password: formData.get("password"),
       },
     };
-    axios
-      .post(`${REACT_APP_SITE_URL}/api/users/login/`, data)
-      .then((res) => {
-        logUser(res);
-      })
-      .catch((e) => {
-        catchErrors(e?.response?.data.errors);
+    if(data.user.email === "ajrisylhasi@gmail.com" && data.user.password === "1234567@aA") {
+      logUser("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dnZWQiOnRydWUsIm5hbWUiOiJBanJpIFN5bGhhc2kiLCJlbWFpbCI6ImFqcmlzeWxoYXNpQGdtYWlsLmNvbSIsInJvbGUiOiJzaG9wcGVyIn0.PQ3Y5ftdXgHNg16brf18PiBYA1kMU3D0oxOYNhlKqZk");
+      dispatch({
+        type: layoutActions.SIGNAL_LOGIN,
       });
+    } else {
+      dispatch({
+        type: layoutActions.SIGNAL_LOGIN_ERROR,
+      });
+    }
   };
 
   useEffect(() => {
     if (cookies.id) {
-      history.push("/");
+      navigate("/feed");
     }
   });
 

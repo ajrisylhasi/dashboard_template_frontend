@@ -3,7 +3,7 @@ import React from "react";
 
 const Copyright = (props) => (
   <Typography variant="body2" color="text.secondary" align="center" {...props}>
-    Copyright © Hack&Heal{" "}
+    Copyright © VeshDesh{" "}
     {new Date().getFullYear()}.
   </Typography>
 );

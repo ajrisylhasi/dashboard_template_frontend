@@ -1,7 +1,7 @@
 import React, { createContext, useMemo } from "react";
 import PropTypes from "prop-types";
 
-import { store, reducer } from "../../store/store";
+import { store, reducer } from "store/store";
 
 /* provides global state and dispatch to all children */
 

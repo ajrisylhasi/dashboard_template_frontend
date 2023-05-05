@@ -1,14 +1,15 @@
 import {
   BrowserRouter as Router,
-  Redirect,
+  // Navigate,
   Route,
-  Switch,
+  Routes,
 } from "react-router-dom";
 import React from "react";
 import { ThemeProvider } from "@mui/material";
 import Provider from "components/provider/Provider";
-import Login from "components/login/Login";
-import Register from "components/register/Register";
+import Login from "pages/auth/Login";
+import Register from "pages/auth/Register";
+import Home from "pages/Home";
 import Layout from "components/layout/Layout";
 import generalTheme from "theme";
 import SignalHandler from "components/layout/SignalHandler";
@@ -16,28 +17,15 @@ import SignalHandler from "components/layout/SignalHandler";
 const App = () => (
   <Provider>
     <ThemeProvider theme={generalTheme}>
-      <div className="root" data-testid="app_test_id">
         <SignalHandler />
         <Router>
-          <Switch>
-            <Route path={["/login"]}>
-              <Login />
-            </Route>
-            <Route path={["/reset-password/:email/:code", "/reset-password"]}>
-              <p>Reset Password</p>
-            </Route>
-            <Route path={["/register/:email/:code", "/register"]}>
-              <Register />
-            </Route>
-            <Route path={["", "/"]}>
-              <Layout />
-            </Route>
-            <Route>
-              <Redirect to="/" />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/feed/*" element={<Layout />} />
+          </Routes>
         </Router>
-      </div>
     </ThemeProvider>
   </Provider>
 );

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { storeContext } from "components/provider/Provider";
-import {layoutActions} from "../../store/layouts-reducer";
-import Signal from "../../shared/components/Singal";
+import {layoutActions} from "store/layout-reducer";
+import Signal from "shared/components/Singal";
+import { Box } from "@mui/material";
 
 const SignalHandler = () => {
   const { state, dispatch } = useContext(storeContext);
@@ -17,8 +18,7 @@ const SignalHandler = () => {
   };
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
+    <Box>
       {state.layout.error ? (
         <Signal
           message={state.layout.signalMessage}
@@ -34,7 +34,7 @@ const SignalHandler = () => {
           open={state.layout.openMessage || false}
         />
       )}
-    </>
+    </Box>
   );
 };
 
