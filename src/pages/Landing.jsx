@@ -25,7 +25,7 @@ const Landing = () => {
       REACT_APP_EMAIL_USER_ID
     )
     .then( 
-      () => setMessage("Faleminderit qe na u bashkuat!"),
+      () => setMessage("Faleminderit që na u bashkuat!"),
       () => {setMessage("Dicka nuk funksionoj"); setError(true)},
     );
 
@@ -49,6 +49,9 @@ const Landing = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
+
+      <Typography variant="h3" color={theme.palette.primary.main} mb="10px">Bashkohuni me ne!</Typography>
+      <Typography variant="body1" color={theme.palette.primary.main}>Informohuni me perditësimet e fundit rreth VeshDesh.</Typography>
       <form ref={form} onSubmit={handleSendEmail} id="contact-form">
         <input type="text" id="user_name" name="user_name" placeholder="Emri*" required />
 
@@ -56,7 +59,7 @@ const Landing = () => {
 
         <textarea id="message" name="message" placeholder="Mesazhi" />
 
-        <button type="submit" value="Send">Dergo</button>
+        <PrimaryButton type="submit" value="Send">Dërgo</PrimaryButton>
 
         <Box>
           <Typography variant="caption" color={error ? "error" : "primary"}>{ message }</Typography>
