@@ -67,7 +67,7 @@ const Feed = () => {
         <Grid item xs={8} width="100%" flexWrap="nowrap">
           <Grid container height="100%"> 
             <Grid item xs={4} display="flex" flexDirection="column">
-              <Card image={brownDress} />
+              <Card image={brownDress} priceEuro="85" />
             </Grid>
             <Grid item xs={8}>
               <AdCard image={ad1} />
@@ -77,7 +77,7 @@ const Feed = () => {
         <Grid item xs={4} width="100%" flexWrap="nowrap">
           <Grid container height="100%">
             <Grid item xs={8}>
-              <Card image={babyClothes} />
+              <Card image={babyClothes} priceEuro="30" />
             </Grid>
             <Grid item xs={4}>
               <AdCard image={ad4} />
@@ -102,7 +102,7 @@ const Feed = () => {
               <AdCard image={ad2} />
             </Grid>
             <Grid item xs={4}>
-              <Card image={whiteShirt} />
+              <Card image={whiteShirt} priceEuro="24" priceCents="95" />
             </Grid>
           </Grid>
         </Grid>
@@ -112,11 +112,11 @@ const Feed = () => {
               <AdCard image={ad5}/>
             </Grid>
             <Grid item xs={4} sx={{display: "flex", flexDirection: "column"}}>
-              <Card image={whiteSneakers} />
+              <Card image={whiteSneakers} priceEuro="40" />
               <Card image={newBalance}/>
             </Grid>
             <Grid item xs={4}>
-              <Card image={oliveShirt} />
+              <Card image={oliveShirt} priceEuro="44" priceCents="99" />
             </Grid>
           </Grid>
         </Grid>
@@ -134,7 +134,7 @@ const Feed = () => {
         <Grid item xs={8} width="100%" flexWrap="nowrap">
           <Grid container height="100%"> 
             <Grid item xs={4} display="flex" flexDirection="column">
-              <Card image={brownDress} />
+              <Card image={brownDress} priceEuro="85" />
             </Grid>
             <Grid item xs={8}>
               <AdCard image={ad1} />
@@ -144,10 +144,10 @@ const Feed = () => {
         <Grid item xs={4} width="100%" flexWrap="nowrap">
           <Grid container height="100%">
             <Grid item xs={8}>
-              <Card image={babyClothes} />
+              <Card image={babyClothes} priceEuro="30" />
             </Grid>
             <Grid item xs={4}>
-              <Card image={whiteSneakers} />
+              <Card image={whiteSneakers} priceEuro="40" />
             </Grid>
           </Grid>
         </Grid>
@@ -169,7 +169,7 @@ const Feed = () => {
               <AdCard image={ad2} />
             </Grid>
             <Grid item xs={4}>
-              <Card image={whiteShirt} />
+              <Card image={whiteShirt} priceEuro="24" priceCents="95" />
             </Grid>
           </Grid>
         </Grid>
@@ -183,7 +183,7 @@ const Feed = () => {
               <Card image={newBalance}/>
             </Grid>
             <Grid item xs={4}>
-              <Card image={oliveShirt} />
+              <Card image={oliveShirt} priceEuro="44" priceCents="99"/>
             </Grid>
           </Grid>
         </Grid>

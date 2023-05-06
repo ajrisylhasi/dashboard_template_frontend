@@ -42,7 +42,7 @@ const Landing = () => {
           },
         }}
       >
-        <PrimaryButton sx={{ padding: "15px" }} onClick={() => navigate("/login")}>
+        <PrimaryButton sx={{ padding: "15px" }} onClick={() => navigate("/feed")}>
           Prototipi
         </PrimaryButton>
       </Box>
