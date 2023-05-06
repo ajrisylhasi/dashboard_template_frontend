@@ -1,14 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import emailjs from '@emailjs/browser';
 import logo from 'assets/images/logo.png';
 import 'components/app/App.css';
-import { Button } from "@mui/material";
+import PrimaryButton from "shared/components/buttons/PrimaryButton";
+import { Typography, Box } from "@mui/material";
+import theme from "theme";
 
 const { REACT_APP_EMAIL_SERVICE_ID, REACT_APP_EMAIL_TEMPLATE_ID, REACT_APP_EMAIL_USER_ID } = process.env;
 
-const Home = () => {
+const Landing = () => {
   const navigate = useNavigate();
+  const [ message, setMessage ] = useState("");
+  const [ error, setError ] = useState(false);
   const form = useRef();
 
   const handleSendEmail = (event) => {
@@ -21,8 +25,8 @@ const Home = () => {
       REACT_APP_EMAIL_USER_ID
     )
     .then( 
-      res => console.log(res.text),
-      error => console.log(error.text)
+      () => setMessage("Faleminderit qe na u bashkuat!"),
+      () => {setMessage("Dicka nuk funksionoj"); setError(true)},
     );
 
     event.target.reset();
@@ -30,9 +34,18 @@ const Home = () => {
   
   return (
     <div className="App">
-			<Button onClick={() => navigate("/login")}>
-				Prototipi
-			</Button>
+      <Box
+        sx={{
+          position: "absolute", bottom: "15px", right: "15px",
+          [theme.breakpoints.down("lg")]: {
+            display: 'none'
+          },
+        }}
+      >
+        <PrimaryButton sx={{ padding: "15px" }} onClick={() => navigate("/login")}>
+          Prototipi
+        </PrimaryButton>
+      </Box>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
       </header>
@@ -44,9 +57,13 @@ const Home = () => {
         <textarea id="message" name="message" placeholder="Mesazhi" />
 
         <button type="submit" value="Send">Dergo</button>
+
+        <Box>
+          <Typography variant="caption" color={error ? "error" : "primary"}>{ message }</Typography>
+        </Box>
       </form>
     </div>
   );
 }
 
-export default Home;
+export default Landing;

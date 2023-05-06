@@ -1,20 +1,90 @@
-import React from "react";
+import React, { useContext } from "react";
 import Grid from "@mui/material/Grid";
 import Card from "shared/components/cards";
 import { Box } from "@mui/material";
+import { storeContext } from "components/provider/Provider";
+import FilterCard from "shared/components/cards/filterCard";
+import ad5 from "assets/clothes/ad5.png";
+import ad4 from "assets/clothes/ad4.png";
+import ad2 from "assets/clothes/ad2.png";
+import ad1 from "assets/clothes/ad1.png";
+import babyClothes from "assets/clothes/babyClothes.webp";
+import oliveShirt from "assets/clothes/oliveShirt.png";
+import whiteShirt from "assets/clothes/whiteShirt.png";
+import whiteSneakers from "assets/clothes/whiteSneakers.png";
+import brownDress from "assets/clothes/brownDress.png";
+import AdCard from "shared/components/cards/AdCard";
+import newBalance from "assets/clothes/newBalance.png";
 
 const Feed = () => {
-  console.log("test")
+  const { state } = useContext(storeContext);
 
   return (
-    <Box height="90%" 
-        margin="auto" 
+    <Box height="95%" 
+      margin="auto auto 0px auto" 
+      sx={{
+        aspectRatio: '4/3', 
+        maxWidth: "100%", 
+        overflow: "scroll", 
+        scrollbarWidth: "none"
+      }}
+    >
+      <Box className={state.feed.filterOpen && "showing"} sx={{
+        transition: "height 0.5s, opacity 0.3s",
+        height: 0,
+        opacity: 0,
+        '& *': {
+          height: 0,
+          transition: "height, 0.3s"
+        },
+        '&.showing': {
+          height: "33%",
+          opacity: 1,
+          transition: "height, 0.5s",
+          '& *': {
+            height: "100%",
+          }
+        },
+      }}>
+        <Grid item xs={4} width="100%" height="100%" flexWrap="nowrap">
+          <Grid container height="100%">
+            <Grid item xs={12}>
+              <FilterCard />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Box>
+      <Grid
+        container
+        height="100%"
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="center"
         sx={{
-          aspectRatio: '1/1', 
-          maxWidth: "100%", 
-          overflow: "scroll", 
-          scrollbarWidth: "none"
-        }}>
+          overflow: "hidden",
+        }}
+      >
+        <Grid item xs={8} width="100%" flexWrap="nowrap">
+          <Grid container height="100%"> 
+            <Grid item xs={4} display="flex" flexDirection="column">
+              <Card image={brownDress} />
+            </Grid>
+            <Grid item xs={8}>
+              <AdCard image={ad1} />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={4} width="100%" flexWrap="nowrap">
+          <Grid container height="100%">
+            <Grid item xs={8}>
+              <Card image={babyClothes} />
+            </Grid>
+            <Grid item xs={4}>
+              <AdCard image={ad4} />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
       <Grid
         container
         height="100%"
@@ -29,25 +99,24 @@ const Feed = () => {
         <Grid item xs={4} width="100%" flexWrap="nowrap">
           <Grid container height="100%">
             <Grid item xs={8}>
-              <Card />
+              <AdCard image={ad2} />
             </Grid>
             <Grid item xs={4}>
-              <Card />
+              <Card image={whiteShirt} />
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={8} width="100%" flexWrap="nowrap">
           <Grid container height="100%" sx={{flexWrap: "nowrap"}}>
             <Grid item xs={4}>
-              <Card />
+              <AdCard image={ad5}/>
             </Grid>
             <Grid item xs={4} sx={{display: "flex", flexDirection: "column"}}>
-              <Card />
-              <Card />
+              <Card image={whiteSneakers} />
+              <Card image={newBalance}/>
             </Grid>
             <Grid item xs={4}>
-              <Card />
-              <Card />
+              <Card image={oliveShirt} />
             </Grid>
           </Grid>
         </Grid>
@@ -62,47 +131,64 @@ const Feed = () => {
           overflow: "hidden",
         }}
       >
-        <Grid item xs={4} width="100%" flexWrap="nowrap">
-          <Grid container height="100%">
-            <Grid item xs={4}>
-              <Card />
+        <Grid item xs={8} width="100%" flexWrap="nowrap">
+          <Grid container height="100%"> 
+            <Grid item xs={4} display="flex" flexDirection="column">
+              <Card image={brownDress} />
             </Grid>
-            <Grid item xs={4}>
-              <Card />
-            </Grid>
-            <Grid item xs={4}>
-              <Card />
+            <Grid item xs={8}>
+              <AdCard image={ad1} />
             </Grid>
           </Grid>
         </Grid>
         <Grid item xs={4} width="100%" flexWrap="nowrap">
           <Grid container height="100%">
-            <Grid item xs={4}>
-              <Card />
+            <Grid item xs={8}>
+              <Card image={babyClothes} />
             </Grid>
             <Grid item xs={4}>
-              <Card />
-            </Grid>
-            <Grid item xs={4}>
-              <Card />
+              <Card image={whiteSneakers} />
             </Grid>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid
+        container
+        height="100%"
+        direction="column"
+        justifyContent="flex-start"
+        alignItems="center"
+        sx={{
+          overflow: "hidden",
+          flexWrap: "nowrap",
+        }}
+      >
         <Grid item xs={4} width="100%" flexWrap="nowrap">
           <Grid container height="100%">
-            <Grid item xs={4}>
-              <Card />
+            <Grid item xs={8}>
+              <AdCard image={ad2} />
             </Grid>
             <Grid item xs={4}>
-              <Card />
+              <Card image={whiteShirt} />
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={8} width="100%" flexWrap="nowrap">
+          <Grid container height="100%" sx={{flexWrap: "nowrap"}}>
+            <Grid item xs={4}>
+              <AdCard image={ad5}/>
+            </Grid>
+            <Grid item xs={4} sx={{display: "flex", flexDirection: "column"}}>
+              <AdCard image={ad4} />
+              <Card image={newBalance}/>
             </Grid>
             <Grid item xs={4}>
-              <Card />
+              <Card image={oliveShirt} />
             </Grid>
           </Grid>
         </Grid>
       </Grid>
     </Box>
   );
-};
+}
 export default Feed;

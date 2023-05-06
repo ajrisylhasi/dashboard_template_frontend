@@ -9,7 +9,7 @@ import { ThemeProvider } from "@mui/material";
 import Provider from "components/provider/Provider";
 import Login from "pages/auth/Login";
 import Register from "pages/auth/Register";
-import Home from "pages/Home";
+import Landing from "pages/Landing";
 import Layout from "components/layout/Layout";
 import generalTheme from "theme";
 import SignalHandler from "components/layout/SignalHandler";
@@ -20,7 +20,7 @@ const App = () => (
         <SignalHandler />
         <Router>
           <Routes>
-            <Route path="/" element={<Home/>} />
+            <Route path="/" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/feed/*" element={<Layout />} />

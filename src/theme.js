@@ -31,10 +31,17 @@ const theme = createTheme({
       "'Arvo', serif"
     ]
   },
-  overrides: {
-    MuiGrid: {
-      root: {
-        flexWrap: "nowrap"
+  components: {
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "15px"
+        }
+      }
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: 'contained',
       },
     },
   },
