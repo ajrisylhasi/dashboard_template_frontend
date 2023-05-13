@@ -7,7 +7,7 @@ const FullContainer = styled(Container)(() => ({
     paddingRight: 0,
     margin: "auto"
   },
-  height: "calc(88vh)",
+  height: "calc(88vh - 30px)",
   position: "relative"
 }));
 

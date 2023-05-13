@@ -15,18 +15,25 @@ import whiteSneakers from "assets/clothes/whiteSneakers.png";
 import brownDress from "assets/clothes/brownDress.png";
 import AdCard from "shared/components/cards/AdCard";
 import newBalance from "assets/clothes/newBalance.png";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const { state } = useContext(storeContext);
+  const navigate = useNavigate();
 
   return (
-    <Box height="95%" 
+    <Box height="100%" 
       margin="auto auto 0px auto" 
       sx={{
         aspectRatio: '4/3', 
         maxWidth: "100%", 
         overflow: "scroll", 
-        scrollbarWidth: "none"
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+        "&::-webkit-scrollbar": {
+          display: "none"
+        }
+
       }}
     >
       <Box className={state.feed.filterOpen && "showing"} sx={{
@@ -67,10 +74,10 @@ const Feed = () => {
         <Grid item xs={8} width="100%" flexWrap="nowrap">
           <Grid container height="100%"> 
             <Grid item xs={4} display="flex" flexDirection="column">
-              <Card image={brownDress} priceEuro="85" />
+              <AdCard image="https://lh3.googleusercontent.com/drive-viewer/AFGJ81oxOPd5fs0QYKq8lbAFPE56pxdeiSQjhmp_8GqgMGSFhQUes_mZaU85MSnDsIVpKYt1ORUnXSmOoEoMuyAWglBTeo_aSw=s1600" buttonClick={() => navigate("/couture-by-hana")} />
             </Grid>
             <Grid item xs={8}>
-              <AdCard image={ad1} />
+              <AdCard image="https://lh3.googleusercontent.com/drive-viewer/AFGJ81pX29NGJ2lM9jsFb2GXXf7Mi85EtcXwN1KO1NDV3EU2hHyWJ28au6FQ8h7FhIOgigeMuzXFSC8dO7DByjKPpe_ZennXPA=s1600" buttonClick={() => navigate("/urban-heart")} />
             </Grid>
           </Grid>
         </Grid>
@@ -80,7 +87,7 @@ const Feed = () => {
               <Card image={babyClothes} priceEuro="30" />
             </Grid>
             <Grid item xs={4}>
-              <AdCard image={ad4} />
+              <AdCard image="https://lh3.googleusercontent.com/drive-viewer/AFGJ81rqJfoUaxO2hrHgWu3_-Y5F6vpQsT9UWj4QnfCuqOAWboyfujg8Lp0h7AgVk6nEz__tHE3dw2A8eUy_yGjjPBHDrOTksA=s1600" buttonClick={() => navigate("/mommy-&-me")}/>
             </Grid>
           </Grid>
         </Grid>

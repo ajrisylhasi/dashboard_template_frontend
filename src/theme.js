@@ -44,6 +44,13 @@ const theme = createTheme({
         variant: 'contained',
       },
     },
+    MuiToolbar: {
+      styleOverrides: {
+        root: {
+          height: "calc(12vh + 30px)",
+        }
+      }
+    },
   },
   breakpoints: {
     values: {

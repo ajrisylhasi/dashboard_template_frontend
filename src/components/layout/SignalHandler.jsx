@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { storeContext } from "components/provider/Provider";
 import {layoutActions} from "store/layout-reducer";
-import Signal from "shared/components/Singal";
+import Signal from "shared/components/Signal";
 import { Box } from "@mui/material";
 
 const SignalHandler = () => {

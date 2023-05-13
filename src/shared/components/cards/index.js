@@ -21,7 +21,7 @@ const StyledCard = styled(MuiCard)(() => ({
 }));
 
 
-const Card = ({ image, priceEuro, priceCents, preloved }) => {
+const Card = ({ image, priceEuro, priceCents, buttonText, preloved }) => {
   if(false) {
     console.log(image);
   }
@@ -32,7 +32,7 @@ const Card = ({ image, priceEuro, priceCents, preloved }) => {
           <Chip sx={{ position: "absolute", top: "15px", width: "auto", height: "31px", left: "15px", borderRadius: "15px", textTransform: "unset", backgroundColor: "#fff", color: theme.palette.info.main, fontSize: "16px", fontFamily: "Red Hat Display", boxShadow: "-3px 3px 8px -2px rgba(0,0,0,0.39)" }} label={<Typography sx={{ fontFamily: "Red Hat Display" }}>{priceEuro}<sup>.{priceCents}€</sup></Typography>} />
           <SecondaryButton size="small" sx={{ position: "absolute", top: "15px", right: "15px"}}><FavoriteBorderOutlinedIcon sx={{ fontSize: "21px" }} color="white"/></SecondaryButton>
           <PrimaryButton size="small" sx={{ position: "absolute", bottom: "15px", right: "100px" }}><ShoppingBagOutlinedIcon sx={{ width: "20px" }} color="white"/></PrimaryButton>
-          <PrimaryButton size="small" sx={{ position: "absolute", bottom: "15px", right: "15px", borderRadius: "15px", textTransform: "unset" }}>Blej tani!</PrimaryButton>
+          <PrimaryButton size="small" sx={{ position: "absolute", bottom: "15px", right: "15px", borderRadius: "15px", textTransform: "unset" }}>{ buttonText }</PrimaryButton>
           {preloved && (
             <Chip sx={{ position: "absolute", bottom: "15px", width: "31px", height: "31px", left: "15px", borderRadius: "15px", textTransform: "unset", backgroundColor: "#fff", color: theme.palette.primary.main, boxShadow: "-3px 3px 8px -2px rgba(0,0,0,0.39)", "& .MuiChip-label": { padding: 0, display: "flex", alignItems: "center"} }} label={<LoopIcon />} />
           )}
@@ -46,13 +46,15 @@ Card.propTypes = {
   image: PropTypes.string,
   priceEuro: PropTypes.string,
   priceCents: PropTypes.string,
-  preloved: PropTypes.bool
+  preloved: PropTypes.bool,
+  buttonText: PropTypes.string
 }
 
 Card.defaultProps = {
   image: null,
   priceEuro: "79",
   priceCents: "00",
-  preloved: false
+  preloved: false,
+  buttonText: "Blej tani!"
 }
 export default Card;

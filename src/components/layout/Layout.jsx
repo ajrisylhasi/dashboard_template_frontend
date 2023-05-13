@@ -1,22 +1,24 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import {
+  useNavigate
+} from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import FullContainer from "shared/components/containers";
-import Sidebar from "components/layout/navigation/Sidebar";
-import Feed from "pages/feed/Feed";
+import Header from "components/layout/navigation/Header";
 
-const Layout = () => {
+const Layout = ({childElement, path}) => {
   const navigate = useNavigate();
   const [cookies] = useCookies(["auth"]);
 
   useEffect(() => {
     if (cookies.id) {
       axios.defaults.headers.common.Authorization = cookies.id;
-      navigate("/feed");
+      navigate(`/${path}`);
     } else {
       navigate("/login");
     }
@@ -25,7 +27,7 @@ const Layout = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <Sidebar />
+      <Header />
       <Box
         component="main"
         sx={{
@@ -37,15 +39,20 @@ const Layout = () => {
           overflow: "auto"
         }}
       >
-        <Toolbar sx={{ height: '12vh' }}/>
-        <FullContainer sx={{ mt: 2, mb: 4, 
+        <Toolbar />
+        <FullContainer sx={{ mb: 4, 
           display: "flex", 
           justifyContent: "center"}}>
-          <Feed />
+            {childElement}
         </FullContainer>
       </Box>
     </Box>
   );
 };
+
+Layout.propTypes = {
+  childElement: PropTypes.node.isRequired,
+  path: PropTypes.string.isRequired
+}
 
 export default Layout;

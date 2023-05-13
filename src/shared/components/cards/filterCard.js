@@ -78,6 +78,32 @@ AirbnbThumbComponent.defaultProps = {
 
 const priceFormat = (value) => (<Typography variant="caption">{value} <b>€</b></Typography>);
 
+const genderGroup = [
+  { label: "Meshkuj", icon: <MaleOutlinedIcon />, onClick: () => {} },
+  { label: "Femra", icon: <FemaleOutlinedIcon />, onClick: () => {} },
+  { label: "Femije", icon: <ToysOutlinedIcon />, onClick: () => {} },
+];
+
+const typeGroup = [
+  { alt: "hoodies", src: hoodies, onClick: () => {} },
+  { alt: "boots", src: boots, onClick: () => {} },
+  { alt: "pants", src: pants, onClick: () => {} },
+  { alt: "shoes", src: shoes, onClick: () => {} },
+  { alt: "jackets", src: jackets, onClick: () => {} },
+  { alt: "gym", src: gym, onClick: () => {} },
+  { alt: "highHeels", src: highHeels, onClick: () => {} },
+  { alt: "shirts", src: shirts, onClick: () => {} },
+  { alt: "dresses", src: dresses, onClick: () => {} },
+];
+
+const typeRowSize = 4;
+
+const typeRows = [];
+
+for (let i = 0; i < typeGroup.length; i += typeRowSize) {
+  typeRows.push(typeGroup.slice(i, i + typeRowSize));
+}
+
 const FilterCard = () => {
   const [ sort, setSort ] = useState(null);
   return (
@@ -85,21 +111,13 @@ const FilterCard = () => {
       <StyledCard>
         <Box height="100%" display="flex" flexBasis="1" paddingTop="35px" paddingBottom="5px">
           <Box width="12%" size="small" padding="5px" display="flex" flexDirection="column" justifyContent="flex-start" gap="15px">
-            <FilterChip onClick={() => {}} icon={<MaleOutlinedIcon />}
-              label={
-                <Typography variant="caption" display="flex" alignItems="center">Meshkuj</Typography>
-              }
-            />
-            <FilterChip onClick={() => {}} icon={<FemaleOutlinedIcon sx={{ fill: theme.palette.secondary.contrastText }} />}
-              label={
-                <Typography variant="caption" display="flex" alignItems="center">Femra</Typography>
-              }
-            />
-            <FilterChip onClick={() => {}} icon={<ToysOutlinedIcon sx={{ fill: theme.palette.secondary.contrastText }} />}
-              label={
-                <Typography variant="caption" display="flex" alignItems="center">Femije</Typography>
-              }
-            />
+            {genderGroup.map((gender) => (
+              <FilterChip onClick={gender?.onClick} icon={gender?.icon}
+                label={
+                  <Typography variant="caption" display="flex" alignItems="center">{gender?.label}</Typography>
+                }
+              />
+            ))}
           </Box>
           <Divider orientation="vertical" variant="middle" sx={{ color: theme.palette.secondary.light, width: "5px", height: "65%", maxHeight: "65%", my: "auto", borderRightWidth: "2px"}} flexItem textAlign="center" />
           <Box width="12%" display="flex" flexDirection="column" padding="5px" justifyContent="flex-start" gap="15px">
@@ -116,132 +134,24 @@ const FilterCard = () => {
           </Box>
           <Divider orientation="vertical" variant="middle" sx={{ color: theme.palette.secondary.light, width: "5px", height: "65%", maxHeight: "65%", my: "auto", borderRightWidth: "2px"}} flexItem />
           <Box width="36%" display="flex" padding="5px" gap="" flexDirection="column">
-            <Box display="flex" gap="15px" maxHeight="30%">
-              <FilterChip onClick={() => {}} 
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={hoodies} alt="Hoodies" />
-                }
-              />
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={boots} alt="boots" />
-                }
-              />
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={pants} alt="pants" />
-                }
-              />
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={shoes} alt="shoes" />
-                }
-              />
-            </Box>
-            <Box display="flex" gap="15px" maxHeight="30%">
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={jackets} alt="jackets" />
-                }
-              />
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={gym} alt="gym" />
-                }
-              />
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={highHeels} alt="highHeels" />
-                }
-              />
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={shirts} alt="shirts" />
-                }
-              />
-            </Box>
-            <Box display="flex" gap="15px" maxHeight="30%">
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={dresses} alt="dresses" />
-                }
-              />
-              <FilterChip onClick={() => {}}
-                sx={{ 
-                  width: "20%", 
-                  display: "flex", 
-                  justifyContent: "center", 
-                  padding: "3px", 
-                  "& .MuiChip-label": { textAlign: "center"} 
-                }}
-                label={
-                  <img src={hoodies} alt="Hoodies" />
-                }
-              />
-            </Box>
+            {typeRows.map((typeRow) => (
+              <Box display="flex" gap="15px" maxHeight="48px">
+                {typeRow.map((type) => (
+                  <FilterChip onClick={type?.onClick} 
+                    sx={{ 
+                      width: "20%", 
+                      display: "flex", 
+                      justifyContent: "center", 
+                      padding: "3px", 
+                      "& .MuiChip-label": { textAlign: "center"} 
+                    }}
+                    label={
+                      <img src={type?.src} alt={type?.alt} />
+                    }
+                  />
+                ))}
+              </Box>
+            ))}
           </Box>
           <Divider orientation="vertical" variant="middle" sx={{ color: theme.palette.secondary.light, width: "5px", height: "65%", maxHeight: "65%", my: "auto", borderRightWidth: "2px"}} flexItem />
           <Box width="18%" display="flex" flexDirection="column" padding="5px" justifyContent="flex-start" gap="15px">
