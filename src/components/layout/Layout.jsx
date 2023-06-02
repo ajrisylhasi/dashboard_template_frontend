@@ -33,7 +33,7 @@ const Layout = ({childElement, path}) => {
         sx={{
           backgroundColor: (theme) =>
             theme.palette.mode === "light"
-              ? theme.palette.grey[100]
+              ? "#e7f4e6"
               : theme.palette.grey[900],
           flexGrow: 1,
           overflow: "auto"

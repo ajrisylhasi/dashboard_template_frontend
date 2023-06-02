@@ -1,6 +1,5 @@
 import {
   BrowserRouter as Router,
-  // Navigate,
   Route,
   Routes,
 } from "react-router-dom";
@@ -18,20 +17,24 @@ import Store1 from "pages/stores/Store1";
 import Store2 from "pages/stores/Store2";
 import Store3 from "pages/stores/Store3";
 
+if (window.location.pathname === "/") {
+  window.location.replace("https://landing.veshdesh.com");
+}
+
+
 const App = () => (
   <Provider>
     <ThemeProvider theme={generalTheme}>
         <SignalHandler />
         <Router>
           <Routes>
-            <Route path="/" element={<Landing />} />
+            <Route path="/join-us" element={<Landing />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/feed/*" element={<Layout childElement={<Feed />} path="feed" />} />
             <Route path="/urban-heart/*" element={<Layout childElement={<Store1 />} path="urban-heart" />} />
             <Route path="/couture-by-hana/*" element={<Layout childElement={<Store2 />} path="couture-by-hana" />} />
             <Route path="/mommy-&-me/*" element={<Layout childElement={<Store3 />} path="mommy-&-me" />} />
-            <Route path="//*" element={<Layout childElement={<Store1 />} path="" />} />
           </Routes>
         </Router>
     </ThemeProvider>
