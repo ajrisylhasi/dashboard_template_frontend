@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -14,18 +14,19 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
-import { storeContext } from "../provider/Provider";
-import Copyright from "../../shared/components/Copyright";
-import { authActions } from "../../store/auth-reducer";
+import { authActions } from "store/auth-reducer";
+import { layoutActions } from "store/layouts-reducer";
+import { storeContext } from "components/provider/Provider";
+import Copyright from "shared/components/Copyright";
 
-const { REACT_APP_SITE_URL } = process.env;
+const { REACT_APP_API_URL } = process.env;
 const Login = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["auth"]);
-  const { dispatch } = React.useContext(storeContext);
+  const { dispatch } = useContext(storeContext);
 
-  const logUser = (token) => {
-    setCookie("id", token.data.token, {
+  const logUser = (res) => {
+    setCookie("id", res.data.token, {
       path: "/",
       maxAge: 1209600,
     });
@@ -35,32 +36,49 @@ const Login = () => {
         isLoggedIn: true,
       },
     });
-    history.push("/");
+    navigate("/");
   };
 
-  const catchErrors = () => {};
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const data = {
-      user: {
+      spree_user: {
         email: formData.get("email"),
         password: formData.get("password"),
       },
     };
     axios
-      .post(`${REACT_APP_SITE_URL}/api/users/login/`, data)
+      .post(`${REACT_APP_API_URL}/api/login/`, data)
       .then((res) => {
-        logUser(res);
+        if (res.status === 200) {
+          logUser(res);
+          dispatch({
+            type: layoutActions.LAYOUT_SET_ALL,
+            payload: {
+              openMessage: true,
+              error: false,
+              signalMessage: "Kyqur me sukses!",
+            },
+          });
+        }
       })
-      .catch((e) => {
-        catchErrors(e?.response?.data.errors);
+      .catch(() => {
+        dispatch({
+          type: layoutActions.LAYOUT_SET_ALL,
+          payload: {
+            openMessage: true,
+            error: true,
+            signalMessage:
+              "Ka ndodhë një gabim. Ju lutemi, rishikoni detajet dhe provoni prap.",
+          },
+        });
       });
   };
 
   useEffect(() => {
     if (cookies.id) {
-      history.push("/");
+      navigate("/");
     }
   });
 

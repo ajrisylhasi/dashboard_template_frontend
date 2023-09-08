@@ -1,8 +1,8 @@
 const initialLayoutState = {
-  pageTitle: "Dashboard",
+  pageTitle: "Produktet",
   openMessage: false,
   error: false,
-  signalMessage: "Done!",
+  signalMessage: "Me sukses!",
 };
 
 const layoutActions = {

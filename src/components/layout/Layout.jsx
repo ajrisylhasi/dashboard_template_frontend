@@ -1,79 +1,66 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
-import { Route, useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Home from "../home/Home";
-import Register from "../register/Register";
-import { storeContext } from "../provider/Provider";
-import { authActions } from "../../store/auth-reducer";
+import { Container, Toolbar } from "@mui/material";
+// import { storeContext } from "../provider/Provider";
+// import { authActions } from "../../store/auth-reducer";
 import Sidebar from "./Sidebar";
 
-const { REACT_APP_SITE_URL } = process.env;
-
-const Layout = () => {
-  const history = useHistory();
-  const { dispatch } = React.useContext(storeContext);
+const Layout = ({ childElement, path }) => {
+  const navigate = useNavigate();
+  // const { dispatch } = React.useContext(storeContext);
   const [cookies] = useCookies(["auth"]);
 
-  const getData = () => {
-    axios.get(`${REACT_APP_SITE_URL}/api/me/`).then((res) => {
-      dispatch({
-        type: authActions.AUTH_SET_ALL,
-        payload: {
-          user: res.data,
-        },
-      });
-    });
-    dispatch({
-      type: authActions.AUTH_SET_ALL,
-      payload: {
-        isLoggedIn: true,
-      },
-    });
-  };
+  // const getData = () => {
+  //   dispatch({
+  //     type: authActions.AUTH_SET_ALL,
+  //     payload: {
+  //       user: { name: "Ajri Sylhasi", email: "ajrisylhasi@gmail.com" },
+  //     },
+  //   });
+  // };
 
   useEffect(() => {
     if (cookies.id) {
-      axios.defaults.headers.common.Authorization = cookies.id;
-      getData();
-      history.push("/");
+      axios.defaults.headers.common.Authorization = `Bearer ${cookies.id}`;
+      // getData();
+      navigate(`/${path}`);
     } else {
-      history.push("/login");
+      navigate("/login");
     }
   }, []);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height: "100%" }}>
       <CssBaseline />
       <Sidebar />
       <Box
         component="main"
         sx={{
-          backgroundColor: (theme) =>
-            theme.palette.mode === "light"
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
           flexGrow: 1,
-          height: "100vh",
-          overflow: "auto",
+          height: "auto",
+          width: "100%",
         }}
       >
         <Toolbar />
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/settings">
-            <Register />
-          </Route>
+        <Container
+          maxWidth="xl"
+          sx={{ px: "40px", display: "flex", justifyContent: "center" }}
+        >
+          {childElement}
         </Container>
       </Box>
     </Box>
   );
+};
+
+Layout.propTypes = {
+  childElement: PropTypes.node.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default Layout;

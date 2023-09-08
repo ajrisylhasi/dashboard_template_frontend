@@ -1,8 +1,8 @@
 import {
   BrowserRouter as Router,
-  Redirect,
   Route,
-  Switch,
+  Routes,
+  Navigate,
 } from "react-router-dom";
 import React from "react";
 import { ThemeProvider } from "@mui/material";
@@ -12,32 +12,33 @@ import Register from "components/register/Register";
 import Layout from "components/layout/Layout";
 import generalTheme from "theme";
 import SignalHandler from "components/layout/SignalHandler";
+import Products from "pages/Products";
+import Orders from "pages/Orders";
+import Stock from "pages/Stock";
 
 const App = () => (
   <Provider>
     <ThemeProvider theme={generalTheme}>
-      <div className="root" data-testid="app_test_id">
-        <SignalHandler />
-        <Router>
-          <Switch>
-            <Route path={["/login"]}>
-              <Login />
-            </Route>
-            <Route path={["/reset-password/:email/:code", "/reset-password"]}>
-              <p>Reset Password</p>
-            </Route>
-            <Route path={["/register/:email/:code", "/register"]}>
-              <Register />
-            </Route>
-            <Route path={["", "/"]}>
-              <Layout />
-            </Route>
-            <Route>
-              <Redirect to="/" />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
+      <SignalHandler />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Navigate to="/products" />} />
+          <Route
+            path="/products/*"
+            element={<Layout childElement={<Products />} path="products" />}
+          />
+          <Route
+            path="/orders/*"
+            element={<Layout childElement={<Orders />} path="orders" />}
+          />
+          <Route
+            path="/stock/*"
+            element={<Layout childElement={<Stock />} path="stock" />}
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   </Provider>
 );

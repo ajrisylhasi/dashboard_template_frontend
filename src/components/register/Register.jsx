@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import {Link as RouterLink, useHistory} from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -10,15 +10,14 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {useContext} from "react";
-import {storeContext} from "components/provider/Provider";
-import {layoutActions} from "store/layouts-reducer";
+import { useContext } from "react";
+import { storeContext } from "components/provider/Provider";
+import { layoutActions } from "store/layouts-reducer";
 
 const { REACT_APP_SITE_URL } = process.env;
 const Register = () => {
-
   const { dispatch } = useContext(storeContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,7 +31,7 @@ const Register = () => {
     axios
       .post(`${REACT_APP_SITE_URL}/api/users/`, data)
       .then(() => {
-        history.push("/login");
+        navigate("/login");
         dispatch({
           type: layoutActions.LAYOUT_SET_ALL,
           payload: {
